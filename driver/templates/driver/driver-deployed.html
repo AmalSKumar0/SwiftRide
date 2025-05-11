@@ -1,0 +1,78 @@
+{% extends 'driver/base.html' %}
+
+{% block title %}Home - RideSwift{% endblock %}
+
+{% block content %}
+{% load static %}
+<style>
+    .onlive{
+        position: relative;
+        width: 100%;
+    }
+</style>
+<link rel="stylesheet" href="{% static 'style/passenger.css' %}">
+<link rel="stylesheet" href="{% static 'style/card.css' %}">
+<link rel="stylesheet" href="{% static 'style/driver.css' %}">   
+<link rel="stylesheet" href="{% static 'style/driver-request.css' %}">   
+<div class="booking-section">
+    <!-- booking section -->
+    <h1 class="TagLine">BE THE <span class='ride'>DIFFERENCE</span> ON EVERY ROAD</h1>
+    
+ <div class="onlive">
+        <form style="display:inline;">
+            <button value="true" name="change" class="offline search"><span>CHANGE LOCATION</span></button>
+            <button value="true" name="offline" class="offline search">GO OFFLINE</button>
+        </form>
+    </div>
+</div>
+<h2>PASSENGERS REQUESTED YOUR SERVICE</h2>
+   <div class="driver-body">
+    <div class="card-container">
+        <div class="events-container">
+            <div id="event-list">
+                {% if booking %}
+           {% for book in booking %}
+                <div class="event-item">
+                <div class="event-date-box">
+                        <p>{{book.requested_at}}</p>
+                         </div>
+                    <div>
+                        <p class="event-heading"> TRIP from: {{ book.from_location.split|first }} 
+                            to: {{ book.to_location.split|first }}</p>
+                        <p class="event-details">Passenger {{book.passenger}} requested for your {{book.vehicle}}<br> distance {{book.distance}}KM for a sum of {{book.fare}}</p>
+                    </div>
+                    <div class="button">
+                    <a class="calendar-button" href="{% url 'reject_user' book.id %}">Cancel</a> 
+                    <a class="calendar-button" href="{% url 'accept_user' book.id %}">Accept</a>
+                    </div>
+                </div>
+                {% endfor %}
+                {%else%} No bookings available in {{from}}
+                 {% endif %}
+            </div>
+        </div>
+    </div>
+{% include 'driver/box.html' %}
+    
+        
+        <!-- 
+                <div class="card">
+                    <div class="card-content">
+                        <h3>
+                        </h3>
+                        <p>Price: Rs{{book.price}}</p>
+                        <p>Distance:{{book.distance}} KM</p>
+                        <div class="button-group">
+                            <form style="display:inline;">
+                                <button name="cancel" value='{{book.pass_id}}'>Cancel</button>
+                                <button name="accept" value='{{book.pass_id}}'>Accept</button>
+                            </form>
+                        </div>
+                    </div>
+                </div> -->
+           
+    </div>
+
+    <br><br><br><br><br><br><br><br><br>
+
+{% endblock %}

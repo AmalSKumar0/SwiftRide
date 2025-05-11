@@ -1,0 +1,59 @@
+{% extends 'user/base.html' %}
+{% block content %}
+{% load static %}
+<style>
+    .booking-section {
+    padding: 50px 0;
+    background: url("{% static 'assets/images/bg-registration-form-1.jpg'%}") no-repeat center center;
+    background-size: cover;
+}
+</style>
+<link rel="stylesheet" href="{% static 'style/passenger.css' %}">
+<div class="booking-section">
+  <h1 class="TagLine">
+    Ready, Set,<span class="ride"> Ride!</span>
+  </h1>
+  <div class="cardCont into">
+    <div class="searchcard">
+        <div class="searchcard-image">
+            <img src="{% static 'assets/images/registration-form-12.jpg' %}" alt="">
+        </div>
+        <svg class="line" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50,0 L50,300" stroke="orange" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+        </svg>
+        <div class="searchcard-content special-card">
+            <h2 class="searchcard-title">BOOK YOUR TAXI </h2>
+            <!-- form for booking where data enter from,to and landmark for his trip -->
+            <form method="post" action="">
+                {% csrf_token %}
+                {{POST_data}}
+                <div class="fromTo">
+                    <div class="form-group">
+                        <label for="from">From</label>
+                        {{ searchForm.from_loc }}
+                        <div id="suggestions" style="position: absolute;"></div>
+                        <div id="from-error" class="error-message"></div> <!-- Error Message -->
+                    </div>
+
+                    <!-- To Field -->
+                    <div class="form-group">
+                        <label for="to">To</label>
+                        {{ searchForm.to_loc }}
+                        <div id="suggestions2" style="position: absolute;"></div>
+                        <div id="to-error" class="error-message"></div> <!-- Error Message -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="landmark">Landmark</label>
+                    {{ searchForm.landmark }}
+                </div><br>
+                <div class="find-button">
+                    <button type="submit" value="search" name="search" class="search">SEARCH</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

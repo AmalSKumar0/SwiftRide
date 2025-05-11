@@ -1,0 +1,54 @@
+{% extends 'user/profile/profileBase.html' %}
+
+{% block title %}Home - RideSwift{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="content-body">
+    <div class="box">
+        <div class="title">
+           <h3> All Your reviews</h3>
+        </div>
+    </form>
+    </div>
+    <svg class="line" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,50 L1200,50" stroke="orange" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+    </svg>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Vehicle</th>
+                <th>Driver</th>
+                <th>Rating</th>
+                <th>comment</th>
+                <th>Posted at</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if reviews %}
+            {% for review in reviews %}
+            <tr>
+                <td></td>
+                <td>{{ review.vehicle }}</td>
+                <td>{{ review.driver }}</td>
+                <td>{{ review.rating }}</td>
+                <td>{{ review.comment }}</td>
+                <td>{{ review.created_at }}</td>
+                <td> <a href="{% url 'deleteReview' review.id %}">Delete</a> </td>
+
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td style="text-align: center;" colspan="6">No reviews Found</td>
+            </tr>
+            {% endif %}
+        </tbody>
+        
+    </table>
+</div>
+
+
+{% endblock %}

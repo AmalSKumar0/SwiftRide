@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'style/styles.css' %}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <title>Taxi booking | swiftRide</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo">
+          <a href="#">RIDE<span>SWIFT</span>.</a>
+        </div>
+        <div class="nav__menu__btn" id="menu-btn">
+          <span><i class="ri-menu-line"></i></span>
+        </div>
+      </div>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#">About us</a></li>
+        <li><a href="{% url 'driverSignup' %}">Driver</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Support</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="nav__btns">
+        {% if logdr %}
+        <a href="{% url 'driverProfile' %}" class="user-badge">
+          <div class="avatar" id="userAvatar"><i class="ri-user-smile-fill"></i></div>
+          <div>
+              <div class="username" id="userName">{{driver}}</div>
+          </div>
+      </a>
+      {% else %}
+        <a href="{% url 'userSignup' %}" class="btn sign__up">Sign Up</a>
+        <a href="{% url 'login' %}" class="btn sign__in">Sign In</a>
+      {% endif %}
+      </div>
+    </nav>
+    
+    {% block content %}
+    {% endblock %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alertBox" id="alertBox">
+      <div class="bar" id="bar"></div>
+      <div class="data" id="data"><p>{{message}}</p></div>
+  </div>
+  {% endfor %}
+{% endif %}
+
+  <script>   
+      setTimeout(() => {
+          document.getElementById("data").classList.add("hideText");
+          document.getElementById("alertBox").classList.add("shrink");
+          setTimeout(() => {
+              document.getElementById("alertBox").style.display = "none";
+          }, 500);
+      }, 3000);
+  </script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="{% static 'script/main.js' %}"></script>
+    <footer class="f2" id="aboutusSection">
+      <div class="footer">
+      <div class="footer-col">
+          <h3>Kottayam Headquarters</h3>
+          <p>MES college</p>
+          <p>Erumely</p>
+          <p>T: +91 987654321</p>
+          <a href="https://maps.app.goo.gl/1nx6H5m2rmXPvYLn7">Get Directions</a>
+      </div>
+      <div class="footer-col">
+          <h3>Join Our Social Community</h3>
+          <ul class="social-icons">
+            <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fab fa-github"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i></a></li> 
+          </ul>
+      </div>
+      <div class="footer-col">
+          <h3>Let's Discuss What's Next</h3>
+          <p>Have a project or a question? We'd love to hear from you.</p>
+          <p>Contact Us:</p>
+          <p>Email: rikshawhub@gmail.com</p>
+          <p>Phone: +91 987654321</p>
+      </div>
+      <hr>
+      <p class="rights">Copyright &copy; 2024 RikshawHub</p>
+  </footer>
+  
+      <script src="https://unpkg.com/scrollreveal"></script>
+      <script src="{% static 'scripts/main.js' %}"></script>
+    </body>
+  </html>
+  

@@ -1,0 +1,55 @@
+{% extends 'user/profile/profileBase.html' %}
+
+{% block title %}Home - RideSwift{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="content-body">
+    <div class="box">
+        <div class="title">
+           <h3> All Trips: Total distance: {{distance}}KM Total spend: {{price}} </h3>
+        </div>
+    </form>
+    </div>
+    <svg class="line" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,50 L1200,50" stroke="orange" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+    </svg>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Driver</th>
+                <th>Vehicle</th>
+                <th>Distance</th>
+                <th>Price</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if trips %}
+            {% for trip in trips %}
+            <tr>
+                <td>TID{{ trip.id }}</td>
+                <td>{{ trip.driver.name }}</td>
+                <td>{{ trip.vehicle.vehicle_type }}</td>
+                <td>{{ trip.distance }}</td>
+                <td>{{ trip.fare }}</td>
+                <td>{{ trip.from_location }}</td>
+                <td>{{ trip.to_location }}</td>
+                <td>{{ trip.status }}</td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td style="text-align: center;" colspan="6">No Passengers Found</td>
+            </tr>
+            {% endif %}
+        </tbody>
+        
+    </table>
+</div>
+
+
+{% endblock %}

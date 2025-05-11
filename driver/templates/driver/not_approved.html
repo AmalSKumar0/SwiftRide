@@ -1,0 +1,20 @@
+{% extends 'driver/base.html' %}
+
+{% block title %}Home - RideSwift{% endblock %}
+
+{% block content %}
+{% load static %}
+<br>
+<br>
+    <header class="header__container">
+        <div class="header__content" style="position:relative; top: -50px;">
+            <h1>Your<br />Account <span>is not</span> Approved yet</h1>    
+            <p style="position:relative; top: -30px;">Come back later or contact us</p>
+        </div>
+      </div>
+      <div class="header__image">
+        <img src="{% static 'assets/header.png' %}" alt="header" />
+      </div>
+    </header>
+
+{% endblock %}

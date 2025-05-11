@@ -1,0 +1,43 @@
+{% extends 'driver/profile/profileBase.html' %}
+
+{% block title %}Home - RideSwift{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="main">
+<div class="profile-pic">
+    <img id="profileImage" src="{% static 'assets/images/edit.png' %}" alt="Profile" />
+    <label for="fileUpload" class="edit-icon">✎</label>
+</div>
+
+<form class="form" method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <input type="file" name="img" id="fileUpload" accept="image/*" style="display: none;" required/>
+<div class="form-full">
+    <label>Vehicle Type</label>
+    <select name="vehicle_type" required>
+        <option value="Auto Rickshaw">Auto Rickshaw</option>
+        <option value="Economy Car">Economy Car</option>
+        <option value="Sedan">Sedan</option>
+        <option value="Luxury Car" >Luxury Car</option>
+    </select>
+</div>
+<div class="form-full">
+    <label>Manufacture Date</label>
+    <input type="date" name="manufacture_date" placeholder="Manufacture Date" required >
+</div>
+<div class="form-full">
+    <label>License Number</label>
+    <input type="text" name="license_number" placeholder="License Number" required>
+</div>
+<div class="form-full">
+    <label>Vehicle Number</label>
+    <input type="text" name="vehicle_number" placeholder="Vehicle Number" required>
+</div>
+  <div class="button">
+    <button type="submit" class="save-btn">submit</button>
+  </div>
+
+</form>
+</div>
+{% endblock %}

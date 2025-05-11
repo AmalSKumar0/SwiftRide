@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin panel</title>
+    <link rel="stylesheet" href="{% static 'style/admin.css' %}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+      <div class="nav">
+        <!-- <img src="{% static 'assets/images/takicab-taxi-call.gif' %}" alt=""> --> <br><br>
+         <br>
+        <div class="nav-cont">
+          <a href="{% url 'adminDashboard' %}" class="{% if flag != 1 %}non{% endif %}active dash">
+            <span><i class="ri-dashboard-fill"></i></span>
+            Dashboard
+          </a>
+        </div>
+
+        <div class="small">
+          <div class="hr-container">
+            <hr />
+            <span>general</span>
+            <hr />
+          </div>
+        </div>
+ 
+        <div class="nav-cont">
+          <a href="{% url 'allDrivers' %}" class="nav-item {% if flag != 2 %}non{% endif %}active">
+            <span><i class="ri-team-fill"></i></span>
+            Drivers
+          </a>
+          <a href="{% url 'allPassengers' %}" class="nav-item {% if flag != 3 %}non{% endif %}active">
+            <span><i class="ri-team-fill"></i></span>
+            Passengers
+          </a>
+          <a href="{% url 'allVehicles' %}" class="nav-item {% if flag != 4 %}non{% endif %}active">
+            <span><i class="ri-taxi-fill"></i></span>
+            Vehicles
+          </a>
+          <a href="{% url 'allTrips' %}" class="nav-item {% if flag != 5 %}non{% endif %}active">
+            <span><i class="ri-route-fill"></i></span>
+            Trips
+          </a>
+          <a href="{% url 'allReviews' %}" class="nav-item {% if flag != 6 %}non{% endif %}active">
+            <span><i class="ri-feedback-fill"></i></span>
+            Reviews
+          </a>
+        </div>
+      </div>
+      <div class="content-container">
+        <div class="header">
+          <div class="nav__logo">
+            <a href="#">RIDE<span>SWIFT</span>.</a>
+          </div>
+             <div class="account">
+              <img src="{% static 'assets/images/amal.jpg' %}" alt="">
+              <div class="account__info">
+                <h3>Amal s kumar</h3>
+                <p>Admin</p>
+             </div>
+            </div>
+        </div>
+        <div class="body-container">
+    {% block content %}
+    {% endblock %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alertBox" id="alertBox">
+      <div class="bar" id="bar"></div>
+      <div class="data" id="data"><p>{{message}}</p></div>
+  </div>
+  {% endfor %}
+{% endif %}
+
+  <script>   
+      setTimeout(() => {
+          document.getElementById("data").classList.add("hideText");
+          document.getElementById("alertBox").classList.add("shrink");
+          setTimeout(() => {
+              document.getElementById("alertBox").style.display = "none";
+          }, 500);
+      }, 3000);
+  </script>
+        </div>
+      </div>
+  </body>
+</html>
+
+    

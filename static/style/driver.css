@@ -1,0 +1,281 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+:root {
+    --primary-color: #ff833e;
+    --primary-color-dark: #db6f35;
+    --text-dark: #333;
+    --text-light: #767268;
+    --white: #fff;
+    --max-width: 1350px;
+    --header-font: "Bebas Neue", sans-serif;
+}
+
+/* General Styling */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+}
+
+/* Typography */
+h1 {
+    font-size: 3em;
+    color: var(--text-dark);
+    font-family: var(--header-font);
+    margin-top: 20px;
+    text-align: center;
+}
+
+p {
+    margin: 5px 0;
+    font-size: 1em;
+    color: var(--text-light);
+}
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    color: inherit;
+}
+
+/* Admin Section */
+.admin {
+    position: relative;
+    left: 10%;
+    width: 40%;
+    font-family: var(--header-font);
+    font-size: 1.5em;
+    color: var(--text-dark);
+}
+
+.admin span {
+    color: var(--primary-color);
+}
+
+/* Card Styling */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    max-width: var(--max-width);
+    margin: 40px auto;
+}
+
+.card {
+    background-color: var(--white);
+    border: 2px solid #1b1818;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 350px;
+    width: 80%;
+    min-width: 300px;
+    transition: box-shadow 0.2s ease-out;
+}
+
+.card:hover {
+    box-shadow: 2px 8px 12px rgba(0, 0, 0, 0.25);
+}
+
+.card-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--text-dark);
+}
+
+.card-content button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.card-content button:hover {
+    background-color: var(--primary-color-dark);
+}
+
+/* Search Card */
+.searchcard {
+    height: 170px;
+}
+
+.searchcard-content {
+    position: relative;
+    left: 6%;
+}
+
+.search {
+    padding: 0;
+    position: relative;
+    top: 2px;
+    text-align: center;
+    width: 100px;
+    height: 40px;
+}
+
+.find-button {
+    position: relative;
+    top: 12px;
+}
+
+/* Status Buttons */
+.cancel-btn, .accept-btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    color: var(--white);
+}
+
+.cancel-btn {
+    background-color: #ff6b6b;
+}
+
+.accept-btn {
+    background-color: #4caf50;
+}
+
+.cancel-btn:hover,
+.accept-btn:hover {
+    opacity: 0.8;
+}
+
+/* On/Offline Buttons */
+.onlive {
+    width: 30%;
+    left: 37%;
+    text-align: center;
+}
+
+.offline {
+    width: 190px;
+    text-align: center;
+}
+
+.offline:hover {
+    background-color: var(--primary-color-dark);
+    border: solid var(--primary-color-dark);
+}
+
+/* Confirmation Card */
+.confirmcard {
+    height: 250px;
+}
+
+.confirm-details {
+    left: -21px;
+}
+
+.confirm-btn {
+    height: 20%;
+}
+
+/* Driver Card */
+.driver-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.driver-details h4 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Status Messages */
+.status-message,
+.otp-message {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.status-message {
+    color: #444;
+}
+
+.otp-message {
+    color: #ff6b6b;
+}
+
+.highlighted-otp {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+/* Floating Background Animation */
+.area {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: -1;
+    opacity: 0.5;
+    animation: fadeIn 1s ease-in;
+}
+
+.circles li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    border: 5px solid var(--primary-color);
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+}
+
+.circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; }
+.circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-duration: 12s; }
+.circles li:nth-child(3) { left: 70%; width: 20px; height: 20px; }
+.circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-duration: 18s; }
+.circles li:nth-child(5) { left: 65%; width: 20px; height: 20px; }
+.circles li:nth-child(6) { left: 75%; width: 110px; height: 110px; }
+.circles li:nth-child(7) { left: 35%; width: 150px; height: 150px; }
+.circles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-duration: 45s; }
+.circles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-duration: 35s; }
+.circles li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-duration: 11s; }
+
+@keyframes animate {
+    from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    to {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
+
+/* Utilities */
+.display {
+    display: none;
+}

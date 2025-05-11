@@ -1,0 +1,72 @@
+{% extends 'driver/base.html' %}
+
+{% block title %}Home - RideSwift{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'style/passenger.css' %}">
+<link rel="stylesheet" href="{% static 'style/card.css' %}">
+<!-- <link rel="stylesheet" href="{% static 'style/driver.css' %}">    -->
+<link rel="stylesheet" href="{% static 'style/driver-request.css' %}">  
+<style>
+    .onlive{
+        position: relative;
+        width: 100%;
+    }
+    .line{
+        position: relative;
+        top: 35px;
+        z-index: 100;
+    }
+    .searchcard{
+        position: relative;
+        top: -30px;
+        padding-bottom: 30px;
+    }
+    .find-button{
+        position: relative;
+        top: -27px;
+    }
+</style>
+<div class="booking-section">
+    <!-- booking section -->
+    <h1 class="TagLine">BE THE <span class='ride'>DIFFERENCE</span> ON EVERY ROAD</h1>
+</div>
+   <div class="driver-body"><br><br>
+    <div class="card-container">
+        <div class="cardCont">
+            <div class="searchcard confirmcard">
+                <svg class="line" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50,0 L50,300" stroke="orange" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+                </svg>
+                <div class="searchcard-content" >
+                    <h2 class="searchcard-title" style="width: auto;">Your passenger is {{trip.passenger.name}}</h2><br>
+                    <p class="confirm-details">Phone no:{{trip.passenger.phone_no}}</p>
+                    <p class="confirm-details">Their landmark is {{trip.landmark}}</p>
+                    <p class="confirm-details">The trip is from {{trip.from_location}} to {{trip.to_location}}</p>
+                    <form>
+                        <div class="fromTo">
+                            <div class="form-group">
+                                <label for="from">Enter the 6-digit OTP:</label>
+                                <input type="number" name="otp" id="from" placeholder="OTP FOR CONFIRMATION" required>
+                            </div>
+                            <div class="find-button">
+                                <button value="true" name="completed" style="width: 170px;" class="search">COMPLETE
+                                    TRIP</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'driver/box.html' %}
+    {% if thanks %}
+    {% include 'driver/thanks.html' %}
+    {% endif %}
+
+    </div>           
+    </div>
+<br><br><br><br><br><br> <br><br><br><br>
+{% endblock %}

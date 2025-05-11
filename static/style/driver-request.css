@@ -1,0 +1,190 @@
+body {
+    background-color: #e0e5e9;
+}
+
+/* Hide scrollbar for all browsers */
+::-webkit-scrollbar {
+    display: none;
+}
+html {
+    scrollbar-width: none;
+}
+
+/* General Headings */
+h2, .request-title {
+    position: relative;
+    top: 20px;
+    width: 75%;
+    text-align: center;
+}
+
+/* Form Buttons */
+.onlive form button {
+    margin: 5px;
+}
+
+/* Booking Section */
+.booking-section {
+    position: relative;
+    background-color: white;
+    padding: 10px;
+    margin: 5px;
+    width: 98%;
+    border-radius: 10px;
+    left: 1%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* Event Styles */
+.events-container {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+}
+.event-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    max-height: 100px;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+}
+.event-date-box {
+    text-align: center;
+    font-weight: bold;
+    background: #e5e7eb;
+    padding: 10px;
+    border-radius: 8px;
+    min-width: 80px;
+    line-height: 1.4;
+}
+.event-heading {
+    font-size: 16px;
+    font-weight: bold;
+}
+.event-details {
+    font-size: 14px;
+    color: #555;
+}
+.calendar-button {
+    border: none;
+    background: black;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#event-list {
+    position: relative;
+    width: 100%;
+}
+
+/* Driver Section */
+.driver-body {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 200px;
+}
+.card-container {
+    grid-column: 1 / 4;
+    height: 400px;
+    overflow-y: scroll;
+}
+.vehicle-details {
+    position: relative;
+    width: 90%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: white;
+}
+
+/* Search Card Styles */
+.searchcard {
+    height: 170px;
+}
+.searchcard-content {
+    position: relative;
+    left: 60px;
+}
+.searchcard-content button {
+    position: relative;
+    top: 40px;
+}
+.line {
+    position: relative;
+    left: 20px;
+    top: 0;
+    height: 100%;
+}
+.find-button {
+    position: relative;
+    top: 12px;
+    width: auto;
+}
+.search {
+    padding: 0;
+    position: relative;
+    top: 2px;
+    text-align: center;
+    width: 100px;
+    height: 40px;
+}
+
+/* Card Styles */
+.cardCont {
+    padding-bottom: 20px;
+}
+.card {
+    border: 2px solid rgb(27, 24, 24);
+}
+.display {
+    display: none;
+}
+
+/* Confirmation Card */
+.confirmcard {
+    height: 250px;
+}
+.confirm-details {
+    position: relative;
+    left: -21px;
+}
+.confirm-btn {
+    position: relative;
+    height: 20%;
+}
+
+/* Onlive/Offline Buttons */
+.onlive {
+    position: relative;
+    width: 30%;
+    left: 37%;
+    text-align: center;
+}
+.offline {
+    position: relative;
+    width: 190px;
+    text-align: center;
+}
+.offline:hover {
+    background-color: var(--primary-color-dark);
+    border: solid var(--primary-color-dark);
+}
+
+/* Data Container */
+.data-container {
+    color: black;
+    font-size: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.data-container div {
+    text-align: center;
+}

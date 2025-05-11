@@ -1,0 +1,75 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --first-color: #ff833e;
+  --first-color-light:#db8e65;
+  --first-color-lighten:#eebda3;
+  --gradient-color: linear-gradient(180deg,
+  #eebda3,
+  #ff833e);
+  --title-color: #3a1502;
+  --text-color: hsl(175, 8%, 50%);
+  --white-color: #fff;
+  --body-color: hsl(175, 100%, 99%);
+  
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Poppins", sans-serif;
+  --h2-font-size: 1.25rem;
+  --normal-font-size: .938rem;
+  --smaller-font-size: .75rem;
+}
+
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+  color: var(--text-color);
+  /* place-items: center; */
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 200%;
+  height: auto;
+}
+
+/*=============== CARD ===============*/
+.c1 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    position: relative;
+    justify-items: center;
+    align-items: center; 
+}
+
+.c2 {
+  position: relative;
+  width: 290px;
+  background: var(--gradient-color);
+  border-radius: 1rem 1rem 11rem 11rem;
+  padding: 2.5rem 1.5rem 3.5rem;
+  text-align: center;
+  box-shadow: 0 8px 32px hsla(178, 55%, 20%, 0.15);
+}

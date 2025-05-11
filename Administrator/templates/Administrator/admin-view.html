@@ -1,0 +1,294 @@
+
+{% extends 'Administrator/admin-base.html' %}
+
+{% block title %}Home - RideSwift{% endblock %}
+
+{% block content %}{% load static %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<div class="box-grid">
+<div  class="card">
+    <div>
+        <h5>Drivers</h5>
+        <div class="icon">
+            <i class="ri-team-fill"></i>
+        </div>
+        <h1>{{driver}}</h1>
+        <div>
+            <span>{{new_driver}}</span>
+            <span>Since last week</span>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div>
+        <h5>Passengers</h5>
+        <div class="icon">
+            <i class="ri-team-fill"></i>
+        </div>
+        <h1>{{us}}</h1>
+        <div>
+            <span>{{new_user}}</span>
+            <span>Since last week</span>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div>
+        <h5>Vehicles</h5>
+        <div class="icon">
+            <i class="ri-route-fill"></i>
+        </div>
+        <h1>{{vehicle}}</h1>
+        <div>
+            <span>{{trip}}</span>
+            <span>Trips</span>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div>
+        <h5>Reviews</h5>
+        <div class="icon">
+            <i class="ri-feedback-fill"></i>
+        </div>
+        <h1>{{review}}</h1>
+        <div>
+            <span>{{new_review}}</span>
+            <span>Since last week</span>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+<div class="grid-layout wide">
+<div class="graph-1 g-1">
+    <h5>Recent Trips</h5>
+    <div>
+        <canvas id="chartjs-dashboard-line"></canvas>
+    </div>
+</div>
+
+<div  class="graph-1 g-2">
+    <h5>Today Trips</h5>
+    <div>
+        <canvas id="chartjs-dashboard-pie"></canvas>
+    </div>
+    <table style="position: relative;top: 10px;">
+        <tbody>
+            <tr>
+                <td>Canceled</td>
+                <td>{{t2}}</td>
+            </tr>
+            <tr>
+                <td>Completed</td>
+                <td>{{t1}}</td>
+            </tr>
+            <tr>
+                <td>Requested</td>
+                <td>{{t3}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="graph-1 g-3"><form method="post">{% csrf_token %}
+    <div class="header-table">
+    <h3>Current Prices:</h3>
+    <button type="submit">Apply</button>
+</div>
+        <table style="top: 0px;">
+            <tr>
+                <th>Type</th>
+                <th>Base Distance (KM)</th>
+                <th>Rate per km (RS)</th>
+                <th>Commission (%)</th>
+            </tr>
+            {% for data in data_price %}
+            <tr>
+                <td>{{ data.vehicle_type }}</td>
+                <td>
+                    <input type="number" name="base_distance_{{ forloop.counter }}" value="{{ data.base_distance }}" step="0.1">
+                </td>
+                <td>
+                    <input type="number" name="rate_per_km_{{ forloop.counter }}" value="{{ data.rate_per_km }}" step="0.1">
+                </td>
+                <td>
+                    <input type="number" name="commission_rate_{{ forloop.counter }}" value="{{ data.commission_rate }}" step="0.1">
+                </td>
+                <!-- <td>
+                    <button type="submit" name="update_{{ forloop.counter }}">Update</button>
+                </td> -->
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</div>
+
+<script src="{% static 'script/app.js' %}"></script>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
+			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
+			gradient.addColorStop(0, "#ff823e93");
+			gradient.addColorStop(1, "#ff823e36");
+			new Chart(document.getElementById("chartjs-dashboard-line"), {
+				type: "line",
+				data: {
+					labels: {{ label|safe }},
+					datasets: [{
+						label: "Trips",
+						fill: true,
+						backgroundColor: gradient,
+						borderColor: '#ff833e',
+						data: {{ data|safe }},
+					}]
+				},
+				options: {
+					maintainAspectRatio: false,
+					legend: {
+						display: false
+					},
+					tooltips: {
+						intersect: false
+					},
+					hover: {
+						intersect: true
+					},
+					plugins: {
+						filler: {
+							propagate: false
+						}
+					},
+					scales: {
+						xAxes: [{
+							reverse: true,
+							gridLines: {
+								color: "rgba(0,0,0,0.0)"
+							}
+						}],
+						yAxes: [{
+							ticks: {
+								stepSize: 1000
+							},
+							display: true,
+							borderDash: [3, 3],
+							gridLines: {
+								color: "rgba(0,0,0,0.0)"
+							}
+						}]
+					}
+				}
+			});
+		});
+	</script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			// Pie chart
+			new Chart(document.getElementById("chartjs-dashboard-pie"), {
+				type: "pie",
+				data: {
+					labels: ["Completed", "Requested", "Canceled"],
+					datasets: [{
+						data: [{{t1}}, {{t3}}, {{t2}}],
+						backgroundColor: [
+							window.theme.primary,
+							window.theme.warning,
+							window.theme.danger
+						],
+						borderWidth: 5
+					}]
+				},
+				options: {
+					responsive: !window.MSInputMethodContext,
+					maintainAspectRatio: false,
+					legend: {
+						display: false
+					},
+					cutoutPercentage: 75
+				}
+			});
+		});
+	</script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			// Bar chart
+			new Chart(document.getElementById("chartjs-dashboard-bar"), {
+				type: "bar",
+				data: {
+					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+					datasets: [{
+						label: "This year",
+						backgroundColor: window.theme.primary,
+						borderColor: window.theme.primary,
+						hoverBackgroundColor: window.theme.primary,
+						hoverBorderColor: window.theme.primary,
+						data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
+						barPercentage: .75,
+						categoryPercentage: .5
+					}]
+				},
+				options: {
+					maintainAspectRatio: false,
+					legend: {
+						display: false
+					},
+					scales: {
+						yAxes: [{
+							gridLines: {
+								display: false
+							},
+							stacked: false,
+							ticks: {
+								stepSize: 20
+							}
+						}],
+						xAxes: [{
+							stacked: false,
+							gridLines: {
+								color: "transparent"
+							}
+						}]
+					}
+				}
+			});
+		});
+	</script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			var markers = [
+                { coords: [8.5241, 76.9366], name: "Thiruvananthapuram" },
+                { coords: [9.9312, 76.2673], name: "Kochi" },
+                { coords: [11.2588, 75.7804], name: "Kozhikode" }
+            ];
+			var map = new jsVectorMap({
+				map: "world",
+				selector: "#world_map",
+				zoomButtons: true,
+				markers: markers,
+				markerStyle: {
+					initial: {
+						r: 9,
+						strokeWidth: 7,
+						stokeOpacity: .4,
+						fill: '#ff833e'
+					},
+					hover: {
+						fill: '#ff833e',
+						stroke: '#ff833e'
+					}
+				},
+				zoomOnScroll: false
+			});            
+			window.addEventListener("resize", () => {
+				map.updateSize();
+			});
+		});
+	</script>
+	
+{% endblock %}

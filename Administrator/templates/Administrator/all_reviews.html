@@ -1,0 +1,66 @@
+
+{% extends 'Administrator/admin-base.html' %}
+
+{% block title %}Home - RideSwift{% endblock %}
+
+{% block content %}
+
+<style>
+    .body-container{
+        box-shadow: #3333333f 0 10px 20px;
+    }
+</style>
+<div class="content-body">
+    <div class="box">
+        <div class="title">
+           <h3> All Reviews </h3>
+        </div>
+        <form method="get">
+        <div class="search"> 
+            <input type="text" name="q" placeholder="Search reviews" />
+            <button type="submit"><i class="ri-search-line"></i></button>
+        </div>
+    </form>
+    </div>
+    <svg class="line" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,50 L1200,50" stroke="orange" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+    </svg>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Driver</th>
+                <th>Vehicle</th>
+                <th>Passenger</th>
+                <th>Rating</th>
+                <th>comment</th>
+                <th>Posted at</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if reviews %}
+            {% for review in reviews %}
+            <tr>
+                <td></td>
+                <td>{{ review.driver }}</td>
+                <td>{{ review.vehicle }}</td>
+                <td>{{ review.passenger }}</td>
+                <td>{{ review.rating }}</td>
+                <td>{{ review.comment }}</td>
+                <td>{{ review.created_at }}</td>
+                <td> <a href="{% url 'deleteReview1' review.id %}">Delete</a> </td>
+
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td style="text-align: center;" colspan="6">No reviews Found</td>
+            </tr>
+            {% endif %}
+        </tbody>
+        
+    </table>
+</div>
+
+{% endblock %}

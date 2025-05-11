@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - RideSwift{% endblock %}
+
+{% block content %}
+{% load static %}
+<br>
+<br>
+    <header class="header__container">
+      <div class="header__image">
+        <div class="header__image__card header__image__card-1">
+          <span><i class="ri-key-line"></i></span>
+          Secure
+        </div>
+        <div class="header__image__card header__image__card-2">
+          <span><i class="ri-passport-line"></i></span>
+          Easy Booking
+        </div>
+        <div class="header__image__card header__image__card-3">
+          <span><i class="ri-map-2-line"></i></span>
+          Anywhere
+        </div>
+        <div class="header__image__card header__image__card-4">
+          <span><i class="ri-guide-line"></i></span>
+          Destinations
+        </div>
+        <img src="{% static 'assets/header.png' %}" alt="header" />
+      </div>
+      <div class="header__content">
+        <h1>LET'S GO!<br />TAXIES <span>ON YOUR</span> FINGERTIPS</h1>
+        
+          
+          <P style="position: relative;left: 20px;">Search your ideal taxi:</P>
+       
+        <style>
+          #suggestions,
+#suggestions2 {
+    border: 1px solid #ddd;
+    max-width: 300px;
+    margin-top: 5px;
+    position: absolute;
+    background-color: white;
+    z-index: 1000;
+}
+
+.suggestion-item {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #eee;
+}
+        </style>
+        <form class="form-input" action="/">
+          <div class="input__row">
+            <div class="input__group">
+              <div>
+                <span><i class="ri-map-pin-line"></i></span>
+                <input type="text" name="from" id="autocomplete" placeholder="Current location" required>
+                <div id="suggestions"></div>
+                <div id="from-error" class="error-message"></div>
+              </div>
+            </div>
+            <div class="input__group">
+              <div>
+                <span><i class="ri-map-pin-line"></i></span>
+                <input type="text" name="to" id="autocomplete2" placeholder="Destination" required>
+                <div id="suggestions2"></div>
+                <div id="to-error" class="error-message"></div>
+              </div>
+            </div>
+          </div>
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    </header><br><br><br>
+    <br><br><br>
+
+{% endblock %}

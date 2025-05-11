@@ -1,0 +1,17 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'style/window.css' %}">
+<div class="paycard">
+    <div class="thankyou">
+        <div class="cardThank">
+            <div class="card-content-thank">
+                <h2 style=" position: relative; width: 100%; text-align: center;">Thank You!</h2>
+                <p>Congratulations! You have received a payment of <span class="amount">₹ {{trip.fare}}</span> for successfully completing the trip</p>
+                <form action="" method="GET">
+                    <button class="go-back-btn" name="done" value="true">Go Back</button>
+                </form>
+          
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'script/confetti.js' %}"></script>

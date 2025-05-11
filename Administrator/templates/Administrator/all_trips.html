@@ -1,0 +1,71 @@
+
+{% extends 'Administrator/admin-base.html' %}
+
+{% block title %}Home - RideSwift{% endblock %}
+
+{% block content %}
+<style>
+    .body-container{
+        box-shadow: #3333333f 0 10px 20px;
+    }
+</style>
+<div class="content-body">
+    <div class="box">
+        <div class="title">
+           <h3> All Trips </h3>
+        </div>
+        <form method="get">
+        <div class="search"> 
+            <input type="text" name="q" placeholder="Search Trip" />
+            <button type="submit"><i class="ri-search-line"></i></button>
+        </div>
+    </form>
+    </div>
+    <svg class="line" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,50 L1200,50" stroke="orange" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+    </svg>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Id</th>
+                <th>Passenger</th>
+                <th>Driver</th>
+                <th>Vehicle</th>
+                <th>Distance</th>
+                <th>Price</th>
+                <th>From</th>
+                <th>To</th>
+                <th>OTP</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if trips %}
+            {% for trip in trips %}
+            <tr>
+                <td></td>
+                <td>TID{{ trip.id }}</td>
+                <td>{{ trip.passenger.name }}</td>
+                <td>{{ trip.driver.name }}</td>
+                <td>{{ trip.vehicle.vehicle_type }}</td>
+                <td>{{ trip.distance }}</td>
+                <td>{{ trip.fare }}</td>
+                <td>{{ trip.from_location }}</td>
+                <td>{{ trip.to_location }}</td>
+                <td>{{ trip.otp }}</td>
+                <td>{{ trip.status }}</td>
+                <td><a href="{% url 'deleteTrip' trip.id %}" class="btn btn-success">delete</a></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td style="text-align: center;" colspan="6">No Passengers Found</td>
+            </tr>
+            {% endif %}
+        </tbody>
+        
+    </table>
+</div>
+{% endblock %}

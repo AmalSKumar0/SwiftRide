@@ -1,0 +1,56 @@
+{% extends 'driver/base.html' %}
+
+{% block title %}Home - RideSwift{% endblock %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style/passenger.css' %}">
+<link rel="stylesheet" href="{% static 'styles/driver.css' %}">
+<style>
+.booking-section {
+    padding: 50px 0;
+    background: url("{% static 'assets/images/bg-registration-form-1.jpg'%}") no-repeat center center;
+    background-size: cover;
+}
+.searchcard{
+    height: 200px;
+}
+.searchcard-content {
+    left: 80px;
+}
+.search{
+    position: relative;
+    top: 44px;
+    width: 140px;
+}
+</style>
+
+<div class="booking-section"><br><br>
+    <!-- booking section -->
+    <h1 class="TagLine">BE THE <span class='ride'>DIFFERENCE</span> ON EVERY ROAD</h1>
+    <div class="cardCont ">
+        <div class="searchcard">
+            <svg class="line" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50,0 L50,300" stroke="orange" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+            </svg>
+            <div class="searchcard-content">
+                <h2 class="searchcard-title">LET EVERY PASSENGER KNOW—YOU'RE READY TO ROLL! </h2>
+                <form method="post" action="{% url 'driverDashboard' %}">
+                    {% csrf_token %}
+                    <div class="fromTo">
+                        <div class="form-group">
+                            <label for="from">Current location:</label>
+                            {{ form.location }}
+                            <div id="suggestions"></div>
+                            <div id="from-error" class="error-message"></div>
+                        </div>
+                        <div class="find-button">
+                            <button value="live" name="live" class="search">GO LIVE!</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br><br><br><br><br>
+{% endblock %}

@@ -1,0 +1,378 @@
+
+{% extends 'user/base.html' %}
+
+{% block title %}Home - RideSwift{% endblock %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style/passenger.css' %}">
+<link rel="stylesheet" href="{% static 'style/card.css' %}">
+<link rel="stylesheet" href="{% static 'style/driver.css' %}">
+<style>
+.booking-section {
+    position: relative;
+    height: 220px;
+    padding: 10px 0;
+    background: url("{% static 'assets/images/bg-registration-form-1.jpg'%}") no-repeat center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly; 
+}
+.searchcard{
+    height: 200px;
+}
+.searchcard-content {
+    left: 80px;
+}
+.line{
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    left: 0px;
+    z-index: 4;
+    top: 50px;
+}
+.search{
+    position: relative;
+    top: 44px;
+    width: 140px;
+}
+.trip-info{
+    background-color: white;
+    position: relative;
+    height: 96%;
+    max-width: 35%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    left: 20px;
+    padding: 10px;
+}
+.search-box {
+    position: relative;
+    background-color: white;
+    height: 96%;
+    width: 100%;
+    max-width: 40%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    left: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.search-box form {
+    position: relative;
+    left: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+}
+
+.box-1, .box2 {
+    flex: 1;
+    min-width: 40%;
+}
+
+.box-1 input, .box2 input{
+    width: 90%;
+}
+
+.trip-info h5{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+}
+.trip-info p{
+    
+    font-size: 15px;
+    color: black;
+    padding-left: 20px;
+}
+.search-btn{
+    position: relative;
+    top: 35px;
+    left: 20px;
+    background-color: #ff833e;
+    border-radius: 10px;
+    color: white;
+    /* height: 20px; */
+    width: auto;
+    padding: 7px;
+    font-size:12px ;
+    text-align: center;
+    justify-content: center;
+}
+.trip-info a{
+    
+    position: relative;
+    top: -40px;
+    left: 90%;
+    background-color: #ff833e;
+    border-radius: 10px;
+    color: white;
+    height: 20px;
+    width: auto;
+    padding: 7px;
+    font-size:12px ;
+}
+.filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+
+    .filter-bar input,
+    .filter-bar select {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .reset-btn {
+      padding: 8px 16px;
+      background-color: #1abc9c;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .car-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .car-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .car-image {
+      width: 100%;
+      height: 160px;
+      background-color: #f0f0f0;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .car-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .status {
+      color: #1abc9c;
+      font-weight: bold;
+      font-size: 12px;
+      background-color: #eafaf7;
+      padding: 4px 8px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    .car-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 4px 0;
+    }
+
+    .car-type {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .car-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 13px;
+      color: #444;
+      margin-bottom: 12px;
+    }
+
+    .feature-icon {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .view-more {
+      color: #007bff;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: auto;
+    }
+    .button-view{
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      width: 100%;
+    }
+    .button-view a{
+      text-align: center;
+    }
+</style>
+<br>
+
+{% if booked %}
+<link rel="stylesheet" href="{% static 'style/window.css' %}">
+<div class="paycard">
+<div class="payment-card">
+  <div class="left-section">
+  <h3>DRIVER DETAILS:</h3>
+    <div class="car1-info">
+      <div class="image-container1">
+        <img src="{{obj.lookupvehicle.vehicle_image.url}}" alt="Car1 Image" class="image-of" />
+      </div>
+    </div>
+    
+    <div class="car1-specs">
+    <div class="specs-left">
+        <p><strong>Name:</strong> {{obj.lookupdriver.name}} </p>
+        <p><strong>Phone no:</strong> {{obj.lookupdriver.phone_no}} </p>
+        <p><strong>Address:</strong> {{obj.lookupdriver.address}} </p>
+    </div>
+    <div class="specs-right">
+        <p><strong>Rating:</strong> {{obj.rating}}★ </p>
+        <p><strong>Licence No:</strong> {{obj.lookupvehicle.license_number}} </p>
+        <p><strong>Vehicle No:</strong> {{obj.lookupvehicle.vehicle_number}} </p>
+    </div>
+</div>
+  </div>
+
+  <div class="right-section">
+  <img src="{% static 'assets/images/Accept Evrything.gif' %}" alt="Car1 Image" class="gif" />
+    <h2>Payment detail</h2>
+    <div class="payment-info">
+      <p>Payment to: {{obj.lookupdriver.name}}</p>
+      <p>From: {{obj.lookupfrom}} To: {{obj.lookupto}}</p>
+        <p>Subtotal:₹{{obj.lookupfare}}</p>
+        <p>Total Distance: {{obj.lookupdistance}} KM</p>
+        <p>Promo code: none</p>
+        <h3>Total:₹{{obj.lookupfare}}</h3>
+    </div>
+    <form style="display: block; " id="paymentbuttons">
+            <button name="Back" onclick="window.location.href='?back=True'" value="true" class="back-button">Back</button>
+            <button name="BookDriver" onclick="window.location.href='?BookDriver={{obj.lookupvehicle.id}}'" value="true" class="purchase-button">Book</button>
+    </form>
+  </div>
+</div>
+</div>
+{% endif %}
+
+<svg class="line" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,50 L1500,50" stroke="orange" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+</svg>
+<div class="booking-section">
+    <div class="trip-info">
+        <h5>Trip information</h5>
+        <p>From: <b>{{location}}</b></p>
+        <p>To: <b>{{to}}</b></p>
+        <p>Landmark: <b>{{land}}</b></p>
+        <p>Distance: <b>{{dis}}KM</b></p>
+        <a href="{% url 'userDashboard' %}">Back</a>
+    </div>
+    <div class="search-box">
+        <form method="post" action="{% url 'userDashboard' %}">
+            <div class="box-1">
+                {% csrf_token %}
+            {{POST_data}}
+                <div class="form-group">
+                    <label for="from">From</label>
+                    {{ searchForm.from_loc }}
+                    <div id="suggestions" style="position: absolute;"></div>
+                    <div id="from-error" class="error-message"></div> <!-- Error Message -->
+                </div>
+
+                <!-- To Field -->
+                <div class="form-group">
+                    <label for="to">To</label>
+                    {{ searchForm.to_loc }}
+                    <div id="suggestions2" style="position: absolute;"></div>
+                    <div id="to-error" class="error-message"></div> <!-- Error Message -->
+                </div>
+            </div>
+            <div class="box2">
+                <div class="form-group">
+                <label for="landmark">Landmark</label>
+                {{ searchForm.landmark }}
+               </div>
+               <div class="">
+                <button type="submit" value="search" name="search" class="search-btn">SEARCH ANOTHER LOCATION</button>
+               </div>
+            </div>
+        </form>
+    </div>
+    
+</div>
+<br>
+<div class="c1">
+    {% for vehicle in vehicles %}
+    <div class="car-card">
+        <div class="car-image">
+          <img src="{{ vehicle.vehicle_image.url }}" alt="Car" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <span class="status">On Trip</span>
+        <div class="car-title">{{vehicle.vehicle_type}}</div>
+        <div class="car-type">price: RS {{vehicle.price}}</div>
+        <div class="car-features">
+          {% if vehicle.vehicle_type == "Auto Rickshaw" %}
+          <div class="feature-icon">👥 3 Seater</div>
+          <div class="feature-icon">⚙️ Semi-Automatic</div>
+          <div class="feature-icon">⛽ LPG</div>
+        {% elif vehicle.vehicle_type == "Economy Car" %}
+          <div class="feature-icon">👥 4 Seater</div>
+          <div class="feature-icon">⚙️ Automatic</div>
+          <div class="feature-icon">⛽ Hybrid</div>
+        {% elif vehicle.vehicle_type == "Sedan" %}
+          <div class="feature-icon">👥 4 Seater</div>
+          <div class="feature-icon">⚙️ Manual</div>
+          <div class="feature-icon">⛽ Electric</div>
+        {% elif vehicle.vehicle_type == "Luxury Car" %}
+          <div class="feature-icon">👥 4 Seater</div>
+          <div class="feature-icon">⚙️ Fully Automatic</div>
+          <div class="feature-icon">⛽ Diesel</div>
+        {% else %}
+          <div class="feature-icon">👥 Unknown Seating</div>
+          <div class="feature-icon">⚙️ Unknown Transmission</div>
+          <div class="feature-icon">⛽ Unknown Fuel</div>
+        {% endif %}
+       </div>
+        <div class="button-view">
+          <a href="#" onclick="window.location.href='?viewProfile={{vehicle.id}}'" class="view-more">View More</a>
+          <a href="#" onclick="window.location.href='?look={{vehicle.id}}'" class="view-more">Book</a>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+{% if  viewTaxi %}
+{% include 'user/profileview.html' %}
+{% endif %}
+</div>
+{% endblock %}

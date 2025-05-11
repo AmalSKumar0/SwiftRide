@@ -1,0 +1,45 @@
+{% extends 'driver/profile/profileBase.html' %}
+
+{% block title %}Home - RideSwift{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="main">
+<div class="profile-pic">
+    <img id="profileImage" src="{{data.vehicle_image.url}}" alt="Profile" />
+    <label for="fileUpload" class="edit-icon">✎</label>
+  <h2>{{data.vehicle_type}}</h2>
+  <p>{{data.license_number}}</p>
+</div>
+
+<form class="form" method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <input type="file" name="img" id="fileUpload" accept="image/*" style="display: none;"/>
+<div class="form-full">
+    <label>Vehicle Type</label>
+    <select name="vehicle_type">
+        <option value="Auto Rickshaw" {% if data.vehicle_type == "Auto Rickshaw" %}selected{% endif %}>Auto Rickshaw</option>
+        <option value="Economy Car" {% if data.vehicle_type == "Economy Car" %}selected{% endif %}>Economy Car</option>
+        <option value="Sedan" {% if data.vehicle_type == "Sedan" %}selected{% endif %}>Sedan</option>
+        <option value="Luxury Car" {% if data.vehicle_type == "Luxury Car" %}selected{% endif %}>Luxury Car</option>
+    </select>
+</div>
+<div class="form-full">
+    <label>Manufacture Date</label>
+    <input type="date" name="manufacture_date" value="{{ data.manufacture_date|date:'Y-m-d' }}">
+</div>
+<div class="form-full">
+    <label>License Number</label>
+    <input type="text" name="license_number" value="{{ data.license_number }}">
+</div>
+<div class="form-full">
+    <label>Vehicle Number</label>
+    <input type="text" name="vehicle_number" value="{{ data.vehicle_number }}">
+</div>
+  <div class="button">
+    <button type="submit" class="save-btn">Save Changes</button>
+  </div>
+
+</form>
+</div>
+{% endblock %}

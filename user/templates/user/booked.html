@@ -1,0 +1,145 @@
+
+{% extends 'user/base.html' %}
+
+{% block title %}Home - RideSwift{% endblock %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style/passenger.css' %}">
+<link rel="stylesheet" href="{% static 'style/review.css' %}">
+<link rel="stylesheet" href="{% static 'style/window.css' %}">
+<!-- <link rel="stylesheet" href="{% static 'style/driver.css' %}"> -->
+<style>
+.booking-section {
+    position: relative;
+    /* height: 220px; */
+    padding: 10px 0;
+    background: url("{% static 'assets/images/bg-registration-form-1.jpg'%}") no-repeat center center;
+    background-size: cover;
+}
+.status-message {
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+    margin-top: 10px;
+}
+
+.otp-message {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff6b6b;
+    margin-top: 10px;
+}
+
+.highlighted-otp {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.driver-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+.trip-info {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.driver-details h4 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+.line {
+    height: 110%;
+    position: absolute;
+    top: 10%;
+    left: 17%;
+    z-index: 200;
+    width: 10%;
+}
+.passvie{
+    position: relative;
+    top: 40px;
+}
+.otp{
+    position: relative;
+    top: -25px;
+}
+
+</style>
+<br>
+
+<div class="booking-section into">
+    <div class="booking-section into">
+        <!-- views based on the flags we mensioned before -->
+        <h1 class="TagLine">
+                YOUR <span class='ride'> Taxi </span> is on the way
+        </h1>
+    <div class="bookwindow cardCont">
+        <div class="searchcard" >
+                 <!-- Fetching details of the driver that the passenger booked -->
+            <div class="dia into">
+                <img class="imageView" src="{{trip.vehicle.vehicle_image.url}}" alt="">
+            </div>
+            <svg class="line" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50,0 L50,300" stroke="orange" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+            </svg>
+            <div class="searchcard-content passvie" style="position: relative;left: -100px; width: 62%;">
+                <div class='trip-info'>
+                    <h2 style="color: #ff833e;">
+                        TRIP: FROM
+                        {{trip.from_location}}
+                        TO
+                        {{trip.to_location}}
+                    </h2>
+                </div>
+                <div class='driver-details'>
+                    <h4>Driver Details</h4>
+                    <p>{{trip.driver.name}}</p>
+                    <p>Address: {{trip.driver.address}}</p>
+                    <p>Phone No: {{trip.driver.phone_no}}</p>
+                    <p>Email: {{trip.driver.email}}</p>
+                    <p>Vehicle No: <span class="vno">{{trip.vehicle.vehicle_number}}</span></p>
+                   {% if trip.status == 'requested' %}  
+                            <div class='status-message'>Rickshaw is requested</div>
+                    {% elif trip.status == 'accepted' %}
+                            <div class='status-message'>Rickshaw is on its way</div>
+                            <div class='otp-message otp'>Trip confirmation OTP,For completing trip:<span class='highlighted-otp'>{{trip.otp}}</span></div>
+                            
+                    {% elif trip.status == 'cancelled'%}
+                            <div class='status-message ' style='color: #dc3545;'>Rickshaw is cancelled</div>
+                    <form >
+                        <button class="confirm" name='cancel' value="true">Confirm</button>
+                    </form>
+                    {% elif trip.status == 'completed' %}
+                         <div class='status-message' style='color: #28a745;'>Passenger reached destination</div>
+                    <form style="display:flex;flex-direction:row;" method='get' class="button-review">
+                        <button class="search pass-confirm-button" name='review' value="True">Review</button>
+                        <button class="search pass-confirm-button" name='confirmTrip' value="True">Confirm</button>
+                    </form>
+                    {% endif %}
+                </div>
+                {% if reviewFlag == True %}
+
+                {% include 'user/review.html' %}
+                
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br>
+{% endblock %}

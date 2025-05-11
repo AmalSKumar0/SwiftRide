@@ -1,0 +1,66 @@
+
+{% extends 'Administrator/admin-base.html' %}
+
+{% block title %}Home - RideSwift{% endblock %}
+
+{% block content %}
+<style>
+    .body-container{
+        box-shadow: #3333333f 0 10px 20px;
+    }
+</style>
+<div class="content-body">
+    <div class="box">
+        <div class="title">
+           <h3> New Drivers </h3>
+        </div>
+        <form method="get">
+        <div class="search"> 
+            <input type="text" name="q" placeholder="Search Drivers" />
+            <button type="submit"><i class="ri-search-line"></i></button>
+        </div>
+    </form>
+        <div class="buttons">
+        <a class="new" href="{% url 'allDrivers' %}">Old Drivers</a>
+    </div>
+    </div>
+    <svg class="line" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,50 L1200,50" stroke="orange" stroke-width="2" fill="none" stroke-dasharray="5,5" />
+    </svg>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>License</th>
+                <th>Vehicle</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if drivers %}
+            {% for driver in drivers %}
+            <tr>
+                <td></td>
+                <td>{{ driver.name }}</td>
+                <td>{{ driver.email }}</td>
+                <td>{{ driver.phone_no }}</td>
+                <td>{{ driver.address }}</td>
+                <td>{{ driver.license_number }}</td>
+                <td>{{ driver.vehicle_type }}</td>
+                <td> <a href="{% url 'acceptDriver' driver.id %}" class="btn btn-success">Accept</a></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td style="text-align: center;" colspan="8">No Drivers Found</td>
+            </tr>
+            {% endif %}
+        </tbody>
+        
+    </table>
+</div>
+{% endblock %}
