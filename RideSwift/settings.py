@@ -7,7 +7,7 @@ SECRET_KEY = 'django-insecure-8(c9ma4_)v%)qhnyh1a+7&h)4an2x59vocgz*kji^g%c=7ud!-
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["swiftride-la9r.onrender.com"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
