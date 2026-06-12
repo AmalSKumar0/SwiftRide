@@ -1,0 +1,20 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django build outputs
+staticfiles/
+/media/
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# Editor configurations
+.vscode/
+.idea/
+.DS_Store
+.gemini/

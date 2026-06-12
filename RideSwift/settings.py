@@ -7,7 +7,12 @@ SECRET_KEY = 'django-insecure-8(c9ma4_)v%)qhnyh1a+7&h)4an2x59vocgz*kji^g%c=7ud!-
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["swiftride-la9r.onrender.com"]
+ALLOWED_HOSTS = ["swiftride-la9r.onrender.com", "swiftride.amalskumar.dev", "localhost", "127.0.0.1"]  
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://swiftride-la9r.onrender.com",
+    "https://swiftride.amalskumar.dev",
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -23,6 +28,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -30,6 +36,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'RideSwift.urls'
 
