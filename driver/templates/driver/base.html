@@ -28,6 +28,18 @@
         <li><a href="#">Blog</a></li>
         <li><a href="#">Support</a></li>
         <li><a href="#">Contact</a></li>
+        <li class="mobile-only">
+          {% if logdr %}
+            <a href="{% url 'driverProfile' %}" class="btn sign__in">Profile</a>
+          {% else %}
+            <a href="{% url 'login' %}" class="btn sign__in">Sign In</a>
+          {% endif %}
+        </li>
+        <li class="mobile-only">
+          {% if not logdr %}
+            <a href="{% url 'userSignup' %}" class="btn sign__up_mobile">Sign Up</a>
+          {% endif %}
+        </li>
       </ul>
       <div class="nav__btns">
         {% if logdr %}

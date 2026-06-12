@@ -102,7 +102,8 @@ nav {
   display: grid;
   gap: 2rem;
   overflow-x: hidden;
-  height: 600px;
+  min-height: 600px;
+  height: auto;
 }
 
 .header__image {
@@ -283,6 +284,46 @@ nav {
   text-align: center;
 }
 
+@media (max-width: 768px) {
+  .header__content h1 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+  
+  .mobile-only {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .nav__links .btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+    width: 100%;
+    max-width: 200px;
+    margin-top: 10px;
+  }
+  
+  .nav__links .sign__in {
+    background-color: var(--white);
+    color: var(--primary-color);
+  }
+  
+  .nav__links .sign__up_mobile {
+    border: 2px solid var(--white);
+    color: var(--white);
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
 @media (width > 768px) {
   nav {
     position: static;
@@ -401,7 +442,8 @@ nav {
 }
 
 .form {
-
+position: relative;
+z-index: 2;
 width:98%;
 max-width:400px;
 }

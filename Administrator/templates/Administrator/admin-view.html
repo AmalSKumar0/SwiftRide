@@ -259,36 +259,4 @@
 			});
 		});
 	</script>
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var markers = [
-                { coords: [8.5241, 76.9366], name: "Thiruvananthapuram" },
-                { coords: [9.9312, 76.2673], name: "Kochi" },
-                { coords: [11.2588, 75.7804], name: "Kozhikode" }
-            ];
-			var map = new jsVectorMap({
-				map: "world",
-				selector: "#world_map",
-				zoomButtons: true,
-				markers: markers,
-				markerStyle: {
-					initial: {
-						r: 9,
-						strokeWidth: 7,
-						stokeOpacity: .4,
-						fill: '#ff833e'
-					},
-					hover: {
-						fill: '#ff833e',
-						stroke: '#ff833e'
-					}
-				},
-				zoomOnScroll: false
-			});            
-			window.addEventListener("resize", () => {
-				map.updateSize();
-			});
-		});
-	</script>
-	
 {% endblock %}

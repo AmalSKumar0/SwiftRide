@@ -70,7 +70,8 @@ body {
 
 .content-container {
   flex: 1; 
-  width: calc(85% - 10px); 
+  min-width: 0;
+  width: auto;
   height: 100%;
   background-color: transparent;
   padding: 10px;
@@ -262,8 +263,6 @@ a{
 }
 
 table {
-  position: relative;
-  bottom: 120px;
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
@@ -502,7 +501,7 @@ tr:nth-child(even) {
 .header-table{
   position: relative;
   width: 100%;
-  gap: 65%;
+  justify-content: space-between;
   display: flex;
 }
 .header-table button{
@@ -517,4 +516,56 @@ tr:nth-child(even) {
 }
 .header-table button:hover{
   background-color: var(--primary-color-dark);
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+@media (max-width: 1024px) {
+  body {
+    flex-direction: column;
+    height: auto;
+    overflow: auto;
+  }
+  
+  .nav {
+    width: 100%;
+    position: static;
+    height: auto;
+  }
+  
+  .content-container {
+    width: 100%;
+  }
+  
+  .box-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .grid-layout {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+  
+  .g-1, .g-2, .g-3, .g-4, .g-6 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: auto;
+    grid-row-end: auto;
+  }
+  
+  .box .new {
+    right: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .box-grid {
+    grid-template-columns: 1fr;
+  }
 }
